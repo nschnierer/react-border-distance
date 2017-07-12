@@ -2,19 +2,24 @@
   "name": "react-border-distance",
   "version": "0.0.1",
   "description": "Higher-order component (HOC) to get the distance to window border or scrollable element.",
-  "main": "borderDistance.js",
+  "main": "dist/borderDistance.js",
   "scripts": {
     "test": "jest",
-    "build": "npm run test && babel ./borderDistance.js --out-dir dist"
+    "build": "babel ./borderDistance.js --out-dir dist",
+    "prepublish": "npm run test && npm run build"
   },
-  "keywords": ["getBoundingClientRect", "distance", "window"],
-  "author": {
-    "email": "noel.schnierer@gmail.com",
-    "name": "Noel Schnierer"
+  "keywords": ["getBoundingClientRect", "distance", "window", "react"],
+  "author": "@nschnierer",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nschnierer/react-border-distance.git"
+  },
+  "bugs": {
+    "url": "https://github.com/nschnierer/react-border-distance/issues"
   },
   "license": "MIT",
-  "dependencies": {
-    "react": "^15.6.1"
+  "peerDependencies": {
+    "react": "^15.0.0 || 15.x"
   },
   "devDependencies": {
     "babel-cli": "^6.24.1",
@@ -25,6 +30,7 @@
     "enzyme": "^2.9.1",
     "jest": "^20.0.4",
     "jsdom": "^11.1.0",
+    "react": "^15.0.0 || 15.x",
     "react-dom": "^15.6.1",
     "react-test-renderer": "^15.6.1"
   },

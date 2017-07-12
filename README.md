@@ -5,5 +5,5 @@ Helpful for action-based overlapping content e.g. dropdown or tooltips.
 ## Usage
 The package can be installed via NPM:
 ```
-TBD
+npm install --save react-border-distance
 ```
