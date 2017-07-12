@@ -52,14 +52,6 @@ describe("borderDistance", () => {
     expect(RenderedComponent.prop("status")).toEqual(true);
   });
 
-  it("should pass other props to component", () => {
-    const HocComponent = borderDistance(Component);
-    const wrapper = mount(<HocComponent status={true} />);
-    const RenderedComponent = wrapper.find(Component);
-
-    expect(RenderedComponent.prop("status")).toEqual(true);
-  });
-
   it("should ...", () => {
     // TODO:
   });
