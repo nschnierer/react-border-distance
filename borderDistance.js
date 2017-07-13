@@ -1,4 +1,4 @@
-import React, { PureComponent } from "react";
+import React from "react";
 
 /**
  * Higher-order component (HOC) to get the distance to window border or scrollable element.
@@ -7,7 +7,7 @@ import React, { PureComponent } from "react";
  * @returns {Component}
  */
 export default function borderDistance(BaseComponent, style = null) {
-  class WrappedComponent extends PureComponent {
+  class WrappedComponent extends React.Component {
     constructor() {
       super();
 
