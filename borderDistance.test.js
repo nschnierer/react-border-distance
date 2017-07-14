@@ -1,28 +1,27 @@
 import React from "react";
-import { mount, shallow } from "enzyme";
+import { mount } from "enzyme";
 import TestUtils from "react-dom/test-utils";
 
 import borderDistance from "./borderDistance";
 
-const jsdom = require("jsdom");
-const { JSDOM } = jsdom;
-const dom = new JSDOM(`<!DOCTYPE html><html><body></body></html>`);
+describe("borderDistance()", () => {
+  beforeAll(() => {
+    // mock getBoundingClientRect
+    Element.prototype.getBoundingClientRect = jest.fn(() => ({
+      width: 25,
+      height: 25,
+      top: 25,
+      right: 50,
+      bottom: 50,
+      left: 25
+    }));
+    // mock window
+    global.window.innerWidth = 100;
+    global.window.innerHeight = 100;
+  });
 
-global.window = dom.window;
-global.document = dom.window.document;
-
-describe("borderDistance", () => {
   function Component() {
     return <div />;
-  }
-
-  function ComponentScroll({ children }) {
-    return (
-      <div>
-        {children}
-        <div style={{ marginTop: "10000px" }} />
-      </div>
-    );
   }
 
   it("should be defined", () => {
@@ -36,11 +35,11 @@ describe("borderDistance", () => {
 
     TestUtils.Simulate.mouseEnter(wrapper.getDOMNode());
 
-    expect(RenderedComponent.prop("borderDistance")).toEqual({
-      top: 0,
-      right: 0,
-      bottom: 0,
-      left: 0
+    expect(RenderedComponent.prop("distance")).toEqual({
+      top: 25,
+      right: 50,
+      bottom: 50,
+      left: 25
     });
   });
 
@@ -50,9 +49,5 @@ describe("borderDistance", () => {
     const RenderedComponent = wrapper.find(Component);
 
     expect(RenderedComponent.prop("status")).toEqual(true);
-  });
-
-  it("should ...", () => {
-    // TODO:
   });
 });

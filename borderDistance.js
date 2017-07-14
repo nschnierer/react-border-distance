@@ -74,8 +74,8 @@ export default function borderDistance(BaseComponent, style = null) {
           ? parentNode.getBoundingClientRect()
           : {
               top: 0,
-              right: document.body.clientWidth,
-              bottom: document.body.clientHeight,
+              right: window.innerWidth,
+              bottom: window.innerHeight,
               left: 0
             };
 
@@ -96,7 +96,7 @@ export default function borderDistance(BaseComponent, style = null) {
           onMouseEnter={this.updateDistance}
           style={{ display: "inline-block", ...style }}
         >
-          <BaseComponent borderDistance={distance} {...this.props} />
+          <BaseComponent distance={distance} {...this.props} />
         </span>
       );
     }
