@@ -1,6 +1,6 @@
 ## React Border Distance
 
-![version](https://img.shields.io/npm/v/react-border-distance.svg)
+[![version](https://img.shields.io/npm/v/react-border-distance.svg)](https://www.npmjs.com/package/react-border-distance)
 
 A higher-order component (HOC) to get the distance of a react element to a scrollable element or window border.
 Helpful for action-based overlapping content e.g. dropdown or tooltips.
