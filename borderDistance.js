@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 /**
  * Higher-order component (HOC) to get the distance to window border or scrollable element.
@@ -13,15 +13,23 @@ export default function borderDistance(style = null, className) {
         super();
 
         this.wrapperNode = undefined;
-        this.distance = undefined;
-
-        this.updateDistance = this.updateDistance.bind(this);
+        this.setWrapperNode = this.setWrapperNode.bind(this);
       }
 
       /**
-       * Update distance.
+       * Set wrapperNode.
+       * @param {HTMLElement} ref 
        */
-      updateDistance() {
+      setWrapperNode(ref) {
+        this.wrapperNode = ref;
+        this.forceUpdate();
+      }
+
+      /**
+       * Get distance.
+       * @returns {object}
+       */
+      getDistance() {
         const { wrapperNode } = this;
         if (wrapperNode) {
           // Get scrollable parent element.
@@ -29,17 +37,9 @@ export default function borderDistance(style = null, className) {
           // Get distance to parent or window border.
           const distance = this.getDistanceToParent(wrapperNode, parentNode);
 
-          if (
-            !this.distance ||
-            distance.top !== this.distance.top ||
-            distance.right !== this.distance.right ||
-            distance.bottom !== this.distance.bottom ||
-            distance.left !== this.distance.left
-          ) {
-            this.distance = distance;
-            this.forceUpdate();
-          }
+          return distance;
         }
+        return null;
       }
 
       /**
@@ -54,7 +54,11 @@ export default function borderDistance(style = null, className) {
         if (node === document.body) {
           return node;
         }
-        if (node.offsetHeight > node.clientHeight) {
+
+        const overflowY = window.getComputedStyle(node).overflowY;
+        const isScrollable = overflowY !== 'visible' && overflowY !== 'hidden';
+
+        if (isScrollable && node.scrollHeight > node.clientHeight) {
           return node;
         }
         return this.getScrollParent(node.parentNode);
@@ -89,13 +93,12 @@ export default function borderDistance(style = null, className) {
       }
 
       render() {
-        const { distance } = this;
+        const distance = this.getDistance();
 
         return (
           <span
-            ref={ref => (this.wrapperNode = ref)}
-            onMouseEnter={this.updateDistance}
-            style={{ display: "inline-block", ...style }}
+            ref={this.setWrapperNode}
+            style={{ display: 'inline-block', ...style }}
             className={className}
           >
             <BaseComponent distance={distance} {...this.props} />
