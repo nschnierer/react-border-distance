@@ -38,7 +38,7 @@ class DropDown extends React.Component {
 }
 ```
 
-Example without decorator (e.g. babel-plugin-transform-decorators-legacy):
+Example without decorator:
 ```js
 import React from "react";
 import borderDistance from "react-border-distance";
@@ -66,3 +66,6 @@ export default borderDistance({ position: "relative" }, "class-name")(DropDown);
 An Object which contains the distance.
 `{ top: number, right: number, bottom: number, left: number }`
 (Only available onMouseEnter)
+
+## License
+MIT
